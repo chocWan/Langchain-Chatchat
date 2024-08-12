@@ -18,7 +18,7 @@ from chatchat.server.knowledge_base.kb_doc_api import (
     update_docs,
     update_info,
     upload_docs,
-    search_temp_docs,
+    search_temp_docs, upload_docs_from_disk,
 )
 from chatchat.server.knowledge_base.kb_summary_api import (
     recreate_summary_vector_store,
@@ -91,6 +91,12 @@ kb_router.post(
     response_model=BaseResponse,
     summary="上传文件到知识库，并/或进行向量化",
 )(upload_docs)
+
+kb_router.post(
+    "/upload_docs_from_disk",
+    response_model=BaseResponse,
+    summary="根据已有文件，进行向量化",
+)(upload_docs_from_disk)
 
 kb_router.post(
     "/delete_docs", response_model=BaseResponse, summary="删除知识库内指定文件"
