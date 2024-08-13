@@ -218,16 +218,16 @@ def upload_docs_from_disk(
         file_names: List[str] = Body(
             ..., description="文件名称，支持多文件", examples=["file_name1", "text.txt"]
         ),
-        knowledge_base_name: str = Form(
+        knowledge_base_name: str = Body(
             ..., description="知识库名称", examples=["samples"]
         ),
-        override: bool = Form(False, description="覆盖已有文件"),
-        to_vector_store: bool = Form(True, description="上传文件后是否进行向量化"),
-        chunk_size: int = Form(Settings.kb_settings.CHUNK_SIZE, description="知识库中单段文本最大长度"),
-        chunk_overlap: int = Form(Settings.kb_settings.OVERLAP_SIZE, description="知识库中相邻文本重合长度"),
-        zh_title_enhance: bool = Form(Settings.kb_settings.ZH_TITLE_ENHANCE, description="是否开启中文标题加强"),
-        docs: str = Form("", description="自定义的docs，需要转为json字符串"),
-        not_refresh_vs_cache: bool = Form(False, description="暂不保存向量库（用于FAISS）"),
+        override: bool = Body(False, description="覆盖已有文件"),
+        to_vector_store: bool = Body(True, description="上传文件后是否进行向量化"),
+        chunk_size: int = Body(Settings.kb_settings.CHUNK_SIZE, description="知识库中单段文本最大长度"),
+        chunk_overlap: int = Body(Settings.kb_settings.OVERLAP_SIZE, description="知识库中相邻文本重合长度"),
+        zh_title_enhance: bool = Body(Settings.kb_settings.ZH_TITLE_ENHANCE, description="是否开启中文标题加强"),
+        docs: str = Body("", description="自定义的docs，需要转为json字符串"),
+        not_refresh_vs_cache: bool = Body(False, description="暂不保存向量库（用于FAISS）"),
 ) -> BaseResponse:
     """
     API接口：上传文件，并/或向量化
